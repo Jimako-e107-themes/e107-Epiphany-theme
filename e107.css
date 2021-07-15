@@ -1,20 +1,14 @@
 .form-control.tbox.login  {
-   display: inline;
-   width: auto;
+ 
     background-color: #e8e8e8;
     border: 1px solid #cbcbcb;
     font-family: 'Raleway', Tahoma, sans-serif;
     font-size: 10pt;
     color: #5c5c5c;
-    margin: 2px;
-    padding: 2px 6px;
+ 
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
 
-
-.secimg input#code-verify  {
-    display: inline;
-    width: auto;
-}
+ 

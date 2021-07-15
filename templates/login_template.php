@@ -39,9 +39,7 @@ $LOGIN_WRAPPER['page']['LOGIN_TABLE_LOGINMESSAGE'] = "<div class='alert alert-da
 
 $LOGIN_TEMPLATE['page']['body'] .= '
 <div style="width: 400px; margin: 0 auto; text-align: left;">
-        
         {LOGIN_TABLE_USERNAME}
-         
         {LOGIN_TABLE_PASSWORD}
         {SOCIAL_LOGIN: size=3x}
 		{LOGIN_TABLE_SECIMG_SECIMG} {LOGIN_TABLE_SECIMG_TEXTBOC}
