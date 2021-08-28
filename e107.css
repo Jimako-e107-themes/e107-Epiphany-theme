@@ -11,4 +11,10 @@
     border-radius: 4px;
 }
 
+/* PM link in header navigation fix */
+ .pm-nav.nav-link {
+    display: inline;
+    color: #efa008;
+    padding: 1px;
+}
  

@@ -24,135 +24,108 @@ $FORUM_TRACK_END	= "<br />TRACK-END";
 
 // New in v2.x - requires a bootstrap theme be loaded.  
 
+if(class_exists('theme_settings')) {
+  $theme_settings = theme_settings::get_forumstyle(); 
+}
 
-$FORUM_TEMPLATE['main']['start']			=  "";
+$FORUM_TEMPLATE['main']['start']			= '
+<div class="row">
+    <div class="col-12">';
 
-$FORUM_TEMPLATE['main']['parent_start']			= 	'
-<style>
-.magic-table {
-	border-collapse: collapse;
-	width: 100%;
-	 
-  }
-  
-  .magic-table tbody tr:nth-child(odd) {
-	  background-color: rgba(100, 150, 250, 0.05); 
-  }
-  
-  .magic-table td,
-  th {
-	  padding: 10px; 
-  }
-  
-  @media screen and (max-width: 500px) {
-	.magic-table {
-	  width: 100%;
-	}
-  
-	.magic-table thead {
-	  display: none;
-	}
-	.magic-table tr {
-	  display: flex;
-	  flex-direction: column;
-	  margin-bottom: 1px;
- 
-	  border-radius: 4px;
-	  background-color: #fff;
-	  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-	}
-	 
-	.magic-table td {
-	  padding: 0.25rem;
-	  text-align: center;
-	}
-  
-	
-  }
-  
-  @media screen and (max-width: 500px) {
-.magic-table td:nth-child(1) {
-		content: " ";
-	}
-	.magic-table td:nth-child(2)::before {
-	  content: "{LAN=FORUM_0003}: ";
-	}
-	.magic-table td:nth-child(3)::before {
-	  content: "{LAN=FORUM_0002}: ";
-	}
-	.magic-table td:nth-child(4)::before {
-	  content: "{LAN=FORUM_0004}: ";
-	}
-	.magic-table td::before {
-	  font-weight: bold;
-	}
-	}
-</style>
-<div class=" ">
-  <div class=" ">
-    <div class=" mb-2" >
-        <h3 class=" ">
-            {PARENTIMAGE:h=50}{PARENTNAME} {PARENTSTATUS}
-        </h3>
-        <div class=" p-0">  
-        <table class="magic-table table table-responsive table-bordered table-stripped">
-         <thead> <tr class="forum-parent">
-        											<th scope="col"  style="width: 50%;">  
-        											<th scope="col" class="text-center">{LAN=FORUM_0003}</th>
-        											<th scope="col" class="text-center">{LAN=FORUM_0002}</th>
-        											<th scope="col" class="text-center">{LAN=FORUM_0004}</th>
-        											</tr> </thead><tbody>
-         
-										 ';
-
-$FORUM_TEMPLATE['main']['parent_end']	    = '</tbody></table></section></div>        
-         </div>
+$FORUM_TEMPLATE['main']['end']				= '
+    </div>
+    <div class="col-12">
+        <div class="forum-footer text-center"><small>{USERINFOX}</small> | <small>{USERINFO}</small></div>
     </div>
 </div>';
 
+$SC_WRAPPER['PARENTNAME'] = "<h3>{---}</h3>";
 
-$FORUM_TEMPLATE['main']['forum']			= 	'<tr>
-											<td class=" text-md-start">{NEWFLAG} 
-											 {FORUMIMAGE:h=50}{FORUMNAME}<br /><small>{FORUMDESCRIPTION}</small>{FORUMSUBFORUMS}</td>
-											<td class="text-center">{REPLIESX}</td>
-											<td class="text-center">{THREADSX}</td>
-											<td class="text-center"><small>{LASTPOST:type=username} {LASTPOST:type=datelink}</small></td>
-											</tr>';
+$FORUM_TEMPLATE['main']['parent_start']			= 	'
+<div class="forum-card card'.$theme_settings['forum-card'].'">
+  <div class="forum-card-header '.$theme_settings['forum-card-header'].' ">
+  	<div class="row">
+  		<div class="col-lg-7 col-md-6 col-12">  {PARENTIMAGE:h=50}{PARENTNAME} {PARENTSTATUS}	</div>
+  		<div class="col-md-2 d-none d-md-block text-center">{LAN=FORUM_0002}/{LAN=FORUM_0003}</div>
+  		<div class="col-lg-3 col-md-4 d-none d-md-block">{LAN=FORUM_0004}</div>
+  	</div>
+  </div> 
+  <div class="card-body">
+        <ul class="forum-list-group list-group '.$theme_settings['forum-list-group'].'  ">';
+
+$FORUM_TEMPLATE['main']['parent_end']	    = 
+        '</ul>
+    </div>
+</div>';
+
+$FORUM_TEMPLATE['main']['forum']			= 	'
+
+<li class="forum-list-group-item  '.$theme_settings['forum-list-group-item'].' ">
+ 
+  <div class="row align-items-center">
+    <div class="col-lg-7 col-md-6 col-12 ">
+      {NEWFLAG}{FORUMIMAGE:h=50}{FORUMNAME}<br><small>{FORUMDESCRIPTION}</small>{FORUMSUBFORUMS} 
+      <span class="d-md-none"> 
+        <i class="fa fa-list ml-2" title="{LAN=FORUM_0002}" aria-hidden="true"></i><span class="sr-only">{LAN=FORUM_0002}</span> {THREADSX} &nbsp; 
+        <i class="fa fa-comment-o  ml-2" title="{LAN=FORUM_0003}" aria-hidden="true"></i><span class="sr-only">{LAN=FORUM_0003}</span> {REPLIESX}
+        <br><small>{LAN=FORUM_0004}: <span class="post-author">{LASTPOST:type=username}</span> <span class="post-date">{LASTPOST:type=datelink}</span></small>
+      </span>
+    </div>
+    
+    <div class="col-md-2 d-none d-md-block text-center">
+        {THREADS} / {REPLIES}
+    </div>
+    <div class="col-lg-3 col-md-4 d-none d-md-block">
+        <span class="post-author">{LASTPOST:type=username}</span> 
+        <span>{LASTPOST:type=datelink}</span> 
+    </div>
+  </div>
+ 
+</li>
+        ';
 
 //{LASTPOST:type=username} + {LASTPOST:type=datelink} can also be replaced by the legacy shortcodes {LASTPOST} or {LASTPOSTUSER} + {LASTPOSTDATE}
 
-$FORUM_TEMPLATE['main']['end']				= "<div class='forum-footer center'><small>{USERINFO}</small></div> ";
 
 // $FORUM_WRAPPER['main']['forum']['USERINFOX'] = "{FORUM_BREADCRUMB}(html before){---}(html after)";
 
 // Tracking
-$FORUM_TEMPLATE['track']['start']       = "{FORUM_BREADCRUMB}<div id='forum-track'>
-											<table class='table table-striped table-bordered table-hover'>
-											<colgroup>
-											<col style='width:5%' />
-											<col />
-											<col style='width:15%' />
-											<col style='width:5%' />
-											</colgroup>
-											<thead>
-											<tr>
+$FORUM_TEMPLATE['track']['start']       = "{FORUM_BREADCRUMB}".'
+<div class="forum-card '.$theme_settings['forum-card'].'">
+  <div class="forum-card-header '.$theme_settings['forum-card-header'].' ">
+  	<div class="row">
+  		<div class="col-lg-7 col-md-6 col-12">  {LAN=FORUM_1003}	</div>
+  		<div class="col-md-2 d-none d-md-block text-center">{LAN=FORUM_0004}</div>
+  		<div class="col-lg-3 col-md-4 d-none d-md-block text-center">{LAN=FORUM_1020}</div>
+  	</div>
+  </div> 
+  <ul class="forum-list-group list-group '.$theme_settings['forum-list-group'].'  ">';
+ 
+$FORUM_TEMPLATE['track']['item']        = '
+<li class="forum-list-group-item  '.$theme_settings['forum-list-group-item'].' ">
+ 
+  <div class="row align-items-center"> 
+    <div class="col-lg-7 col-md-6 col-12 ">
+      {NEWIMAGE}{TRACKPOSTNAME} 
+      <span class="d-md-none">  
+         {LAN=FORUM_0004}: {LASTPOSTUSER} {LASTPOSTDATE}  <br>
+         {LAN=FORUM_1020}: {UNTRACK} 
+      </span>
+    </div>
+    
+    <div class="col-md-2 d-none d-md-block text-center">
+      {LASTPOSTUSER} {LASTPOSTDATE}
+    </div>
+    <div class="col-lg-3 col-md-4 d-none d-md-block text-center">
+       {UNTRACK}
+    </div>
+  </div>
+ 
+</li>'; 
+ 
 
-												<th colspan='2'>{LAN=FORUM_1003}</th>
-												<th class='hidden-xs text-center'>{LAN=FORUM_0004}</th>
-												<th class='text-center'>{LAN=FORUM_1020}</th>
-												</tr>
-											</thead>
-											";
 
-$FORUM_TEMPLATE['track']['item']        = "<tr>
-											<td class='text-center'>{NEWIMAGE}</td>
-											<td>{TRACKPOSTNAME}</td>
-											<td class='hidden-xs text-center'><small>{LASTPOSTUSER} {LASTPOSTDATE}</small></td>
-											<td class='text-center'>{UNTRACK}</td>
-											</tr>";
-
-
-$FORUM_TEMPLATE['track']['end']         = "</table>\n</div>";
+$FORUM_TEMPLATE['track']['end']         = "</ul></div>";
 
 
 

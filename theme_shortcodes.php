@@ -10,7 +10,8 @@
  *
 */
 
-$sitetheme = e107::getPref('sitetheme');
+
+$sitetheme = deftrue('USERTHEME', e107::getPref('sitetheme'));
 
 require_once(e_THEME.$sitetheme."/shortcodes/default_shortcodes.php");
 
@@ -33,4 +34,6 @@ class theme_shortcodes extends default_theme_shortcodes
             return "";
         }
     }
+    
+    
 }

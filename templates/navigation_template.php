@@ -5,139 +5,110 @@
 *
 * Navigation Template 
 */
-$main_ul_class = theme_settings::main_ul_class();
-$main_li_class = theme_settings::main_li_class();
-$main_a_class  = theme_settings::main_a_class();
-$main_sub_a_class = theme_settings::main_sub_a_class(); 
-$main_caret = theme_settings::main_caret('-dark'); 
+ 
+if(class_exists('theme_settings')) {
+  $link_settings = theme_settings::get_linkstyle(); 
+}
+
  
 // TEMPLATE FOR {NAVIGATION=main}
-$NAVIGATION_TEMPLATE['main']['start'] = '<ul class="'.$main_ul_class.'">';
-$NAVIGATION_TEMPLATE['main']['end'] = '</ul>';
+$NAVIGATION_TEMPLATE['main']['start'] = $link_settings['main']['prelink']; 
+$NAVIGATION_TEMPLATE['main']['end'] = $link_settings['main']['postlink'];
 
-// Main Link
-$NAVIGATION_TEMPLATE['main']['item'] = '
-	<li class="'.$main_li_class.'">
-		<a class="'.$main_a_class.'" role="button" href="{LINK_URL}"{LINK_OPEN} title="{LINK_DESCRIPTION}">
+
+// Main Link  
+$NAVIGATION_TEMPLATE['main']['item'] = 
+$link_settings['main']['linkstart'].'
+		<a class="'.$link_settings['main']['linkclass'].'"  href="{LINK_URL}"{LINK_OPEN} title="{LINK_NAME}{LINK_DESCRIPTION}">
 		 {LINK_ICON}{LINK_NAME} 
 		</a> 
-	</li>
-';
+'.$link_settings['main']['linkend'];
 
-// Main Link - active state
-$NAVIGATION_TEMPLATE['main']['item_active'] = '
-	<li class="'.$main_li_class.' active">
-		<a class="'.$main_a_class.' active" role="button"  data-target="#" href="{LINK_URL}"{LINK_OPEN} title="{LINK_DESCRIPTION}">
-		 {LINK_ICON} {LINK_NAME}
-		</a>
-	</li>
-';
-
-// Main Link which has a sub menu. 
-$NAVIGATION_TEMPLATE['main']['item_submenu'] = '
-	<li class="'.$main_li_class.' dropdown {LINK_IDENTIFIER}">
-		<a class="'.$main_a_class.' dropdown-toggle "  role="button" data-bs-toggle="dropdown" data-target="#"  title="{LINK_DESCRIPTION}">
+// Main Link  
+$NAVIGATION_TEMPLATE['main']['item_active'] = 
+$link_settings['main']['linkstart_hilite'].'
+		<a class="'.$link_settings['main']['linkclass_hilite'].'"  href="{LINK_URL}"{LINK_OPEN} title="{LINK_NAME}{LINK_DESCRIPTION}">
 		 {LINK_ICON}{LINK_NAME} 
-		 '.$main_caret.'
 		</a> 
-		{LINK_SUB}
-	</li>
-';
+'.$link_settings['main']['linkend'];
 
-// Main Link which has a sub menu - active state.
-$NAVIGATION_TEMPLATE['main']['item_submenu_active'] = '
-	<li class="'.$main_li_class.' dropdown active {LINK_IDENTIFIER}">
-		<a class="'.$main_a_class.'" role="button" data-bs-toggle="dropdown" data-target="#" href="{LINK_URL}">
-		 {LINK_ICON}{LINK_NAME}
-		 '.$main_caret.'
-		</a>
-		{LINK_SUB}
-	</li>
-';	
-
-	
+// Main Link which has a sub menu. Only FIRST LEVEL 
+$NAVIGATION_TEMPLATE['main']['item_submenu'] = 
+$link_settings['main']['linkstart_sub'].' 
+<a class="'.$link_settings['main']['linkclass_sub'].'" id="link-{LINK_ID}" '.$link_settings['main']['dropdown_on'].' data-target="#" 
+title="{LINK_NAME}{LINK_DESCRIPTION}" href="{LINK_URL}" >{LINK_ICON}{LINK_NAME}</a> 
+    {ALT_LINK_SUB}  
+'.$link_settings['main']['linkend'];
+ 
+// Main Link which has a sub menu - active state. Only FIRST LEVEL 
+$NAVIGATION_TEMPLATE['main']['item_submenu_active'] = $link_settings['main']['linkstart_sub_hilite'].'  
+<a class="'.$link_settings['main']['linkclass_sub_hilite'].'" '.$link_settings['main']['dropdown_on'].' data-target="#" href="{LINK_URL}" title="{LINK_NAME} {LINK_DESCRIPTION}">
+{LINK_ICON}{LINK_NAME}'.$link_settings['main']['linkcaret'].'
+</a>
+{ALT_LINK_SUB}
+'.$link_settings['main']['linkend'];
 
 // Sub menu 
-$NAVIGATION_TEMPLATE['main']['submenu_start'] = '
-		<div class="dropdown-menu dropdown-menu-animation dropdown-md p-3 border-radius-lg mt-0 mt-lg-3" >
-';
-
-// Sub menu Link 
-$NAVIGATION_TEMPLATE['main']['submenu_item'] = '
-		 
-				<a class="'.$main_sub_a_class.'" href="{LINK_URL}"{LINK_OPEN}>{LINK_ICON}{LINK_NAME}</a>
-	 
-';
-
-// Sub menu Link - active state
-$NAVIGATION_TEMPLATE['main']['submenu_item_active'] = '
-		 
-				<a class="'.$main_sub_a_class.' active" href="{LINK_URL}"{LINK_OPEN}>{LINK_ICON}{LINK_NAME}</a>
-		 
-';
-
-// Sub Menu Link which has a sub menu. 
-$NAVIGATION_TEMPLATE['main']['submenu_loweritem'] = '
-	 
-				<a class="'.$main_sub_a_class.'" href="{LINK_URL}"{LINK_OPEN}>{LINK_ICON}{LINK_NAME}</a>
-				<img src="{THEME_PATH}/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1">
-				{LINK_SUB}
-		 
-';
-
-$NAVIGATION_TEMPLATE['main']['submenu_loweritem_active'] = '
-		 
-				<a class="'.$main_sub_a_class.' active " href="{LINK_URL}"{LINK_OPEN}>{LINK_ICON}{LINK_NAME}</a>
-				<img src="{THEME_PATH}/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1">
-				{LINK_SUB}
-	 
-';
+$NAVIGATION_TEMPLATE['main']['submenu_start'] = $link_settings['main_sub']['prelink'];
+$NAVIGATION_TEMPLATE['main']['submenu_end']   = $link_settings['main_sub']['postlink'];
 
 
-$NAVIGATION_TEMPLATE['main']['submenu_end'] = '</div>';
+// Sub menu Link ONLY SECOND LEVEL
+$NAVIGATION_TEMPLATE['main']['submenu_item'] = 
+$link_settings['main_sub']['linkstart']
+.'<a class="'.$link_settings['main_sub']['linkclass'].'" href="{LINK_URL}"{LINK_OPEN}>{LINK_ICON}{LINK_NAME}</a>'.$link_settings['main_sub']['linkend'];
+
+// Sub menu Link - active state ONLY SECOND LEVEL
+$NAVIGATION_TEMPLATE['main']['submenu_item_active'] = 
+$link_settings['main_sub']['linkstart_hilite']
+.'<a class="'.$link_settings['main_sub']['linkclass_hilite'].'" href="{LINK_URL}"{LINK_OPEN}>{LINK_ICON}{LINK_NAME}</a>'.$link_settings['main_sub']['linkend'];
 
 
+// sub sub menu
+$NAVIGATION_TEMPLATE['main']['submenu_lowerstart'] =  $link_settings['main_sub_sub']['prelink'];
+$NAVIGATION_TEMPLATE['main']['submenu_lowerend']   = $link_settings['main_sub_sub']['postlink'];
+
+// Sub Menu Link which has a sub menu.  ONLY THIRD LEVEL
+$NAVIGATION_TEMPLATE['main']['submenu_loweritem'] = 
+$link_settings['main_sub']['linkstart_sub'].'
+<a class="'.$link_settings['main_sub']['linkclass_sub'].'" '.$link_settings['main']['dropdown_on'].'  href="{LINK_URL}"{LINK_OPEN}>{LINK_ICON}{LINK_NAME}</a>
+'.$link_settings['main_sub']['linkcaret'].'{ALT_LINK_SUB}'.$link_settings['main_sub']['linkend'];
+                
+// Active Sub Menu Link which has a sub menu.  ONLY THIRD LEVEL
+$NAVIGATION_TEMPLATE['main']['submenu_loweritem_active'] = 
+$link_settings['main_sub']['linkstart_sub_hilite'].'<a class="'.$link_settings['main_sub']['linkclass_sub_hilite'].'" '.$link_settings['main']['dropdown_on'].'   href="{LINK_URL}"{LINK_OPEN}>submenu_loweritem_active{LINK_ICON}{LINK_NAME}</a>
+'.$link_settings['main_sub']['linkcaret'].'{ALT_LINK_SUB}'.$link_settings['main_sub']['linkend'];
+                 
+                
+ 
 // TEMPLATE FOR {NAVIGATION=side}
 
-$NAVIGATION_TEMPLATE['side']['start'] 				= '<ul class="nav nav-list"><li class="nav-header">Sidebar</li>
+$NAVIGATION_TEMPLATE['side']['start'] 				= '<ul class="list-group nav nav-list"> 
 														';
 
-$NAVIGATION_TEMPLATE['side']['item'] 				= '<li><a href="{LINK_URL}"{LINK_OPEN} title="{LINK_DESCRIPTION}">{LINK_ICON}{LINK_NAME}</a></li>
+$NAVIGATION_TEMPLATE['side']['item'] 				= '<li class="list-group-item"><a href="{LINK_URL}"{LINK_OPEN} title="{LINK_DESCRIPTION}">{LINK_ICON}{LINK_NAME}</a></li>
 														';
+$NAVIGATION_TEMPLATE['side']['item_active'] 		= '<li class="list-group-item active"{LINK_OPEN}><a href="{LINK_URL}" title="{LINK_DESCRIPTION}">{LINK_ICON}{LINK_NAME}</a></li>';
 
-$NAVIGATION_TEMPLATE['side']['item_submenu'] 		= '<li class="nav-header">{LINK_ICON}{LINK_NAME}{LINK_SUB}</li>
-														';
-
-$NAVIGATION_TEMPLATE['side']['item_active'] 		= '<li class="active"{LINK_OPEN}><a href="{LINK_URL}" title="{LINK_DESCRIPTION}">{LINK_ICON}{LINK_NAME}</a></li>
-														';
+$NAVIGATION_TEMPLATE['side']['item_submenu'] 		= $NAVIGATION_TEMPLATE['side']['item'];
+$NAVIGATION_TEMPLATE['side']['submenu_item_active'] = $NAVIGATION_TEMPLATE['side']['item_active'] ;
 
 $NAVIGATION_TEMPLATE['side']['end'] 				= '</ul>
 														';
 
 $NAVIGATION_TEMPLATE['side']['submenu_start'] 		= '';
 
-$NAVIGATION_TEMPLATE['side']['submenu_item']		= '<li><a href="{LINK_URL}"{LINK_OPEN}>{LINK_ICON}{LINK_NAME}</a></li>';
+$NAVIGATION_TEMPLATE['side']['submenu_item']		= '';
 
-$NAVIGATION_TEMPLATE['side']['submenu_loweritem'] = '
-			<li role="menuitem" class="dropdown-submenu">
-				<a href="{LINK_URL}"{LINK_OPEN}>{LINK_ICON}{LINK_NAME}</a>
-				{LINK_SUB}
-			</li>
-';
+$NAVIGATION_TEMPLATE['side']['submenu_loweritem'] = '';
+ 
 
-$NAVIGATION_TEMPLATE['side']['submenu_item_active'] = '<li class="active"><a href="{LINK_URL}">{LINK_ICON}{LINK_NAME}</a></li>';
+
 
 $NAVIGATION_TEMPLATE['side']['submenu_end'] 		= '';
 
 
-// Footer links.  - ie. 3 columns of links.
- /* 
-                     <ul class="list-unstyled">
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Delivery Information</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms &amp; Conditions</a></li>
-                    </ul>    */ 
+// Footer links.  - ie. 3 columns of links. version Rideblue
 $NAVIGATION_TEMPLATE["footer"]["start"] 				= "<ul class='list-unstyled'>\n";
 $NAVIGATION_TEMPLATE["footer"]["item"] 					= "<li><a href='{LINK_URL}'{LINK_OPEN} title=\"{LINK_DESCRIPTION}\">{LINK_ICON}{LINK_NAME}</a></li>\n";
 $NAVIGATION_TEMPLATE["footer"]["item_submenu"] 			= "<li>{LINK_ICON}{LINK_NAME}{LINK_SUB}</li>\n";
@@ -150,19 +121,33 @@ $NAVIGATION_TEMPLATE["footer"]["submenu_item_active"] 	= "<li class='active'><a 
 $NAVIGATION_TEMPLATE["footer"]["submenu_end"] 			= "</ul>";
 
 
+$NAVIGATION_TEMPLATE["footer-horizontal"]["start"] 				= "<ul class='nav justify-content-center'>\n";
+$NAVIGATION_TEMPLATE["footer-horizontal"]["item"] 					= "<li><a href='{LINK_URL}'{LINK_OPEN} title=\"{LINK_DESCRIPTION}\">{LINK_ICON}{LINK_NAME}</a></li>\n";
+$NAVIGATION_TEMPLATE["footer-horizontal"]["item_submenu"] 			= "<li>{LINK_ICON}{LINK_NAME}{LINK_SUB}</li>\n";
+$NAVIGATION_TEMPLATE["footer-horizontal"]["item_active"] 			= "<li class='active'{LINK_OPEN}><a href='{LINK_URL}' title=\"{LINK_DESCRIPTION}\">{LINK_ICON}{LINK_NAME}</a></li>\n";
+$NAVIGATION_TEMPLATE["footer-horizontal"]["end"] 					= "</ul>\n";
+$NAVIGATION_TEMPLATE["footer-horizontal"]["submenu_start"] 		= "<ul class='list-unstyled'>";
+$NAVIGATION_TEMPLATE["footer-horizontal"]["submenu_item"]			= "<li><a href='{LINK_URL}'{LINK_OPEN}>{LINK_ICON}{LINK_NAME}</a></li>\n";
+$NAVIGATION_TEMPLATE["footer-horizontal"]["submenu_loweritem"] 	= "<li><a href='{LINK_URL}'{LINK_OPEN}>{LINK_ICON}{LINK_NAME}</a>{LINK_SUB}</li>\n";
+$NAVIGATION_TEMPLATE["footer-horizontal"]["submenu_item_active"] 	= "<li class='active'><a href='{LINK_URL}'>{LINK_ICON}{LINK_NAME}</a></li>\n";
+$NAVIGATION_TEMPLATE["footer-horizontal"]["submenu_end"] 			= "</ul>";
+
+ 
+/* alt styling is used primary for signin template */
+
+$NAVIGATION_TEMPLATE["alt"]["start"] = $link_settings['alt']['prelink'];
+$NAVIGATION_TEMPLATE['alt']['item'] = 
+$link_settings['alt']['linkstart'].'
+<a class="'.$link_settings['alt']['linkclass'].'" href="{LINK_URL}"{LINK_OPEN}  title="{LINK_DESCRIPTION}">{LINK_ICON}{LINK_NAME} </a> '
+.$link_settings['alt']['linkend'] 
+.$link_settings['alt']['linkdivider'];      
+
+$NAVIGATION_TEMPLATE["alt"]["end"] = $link_settings['alt']['postlink'];
+
+$NAVIGATION_TEMPLATE['top'] = $NAVIGATION_TEMPLATE['alt'];
 
 
-$NAVIGATION_TEMPLATE['alt'] 						= $NAVIGATION_TEMPLATE['main'];
-$NAVIGATION_TEMPLATE["alt"]["start"] = '';
-$NAVIGATION_TEMPLATE['alt']['item'] = '
-	<li>
-		<a  class="page-scroll" role="button" data-toggle="modal" href="#aboutModal" title="{LINK_DESCRIPTION}">
-		 {LINK_ICON}{LINK_NAME} 
-		</a> 
-	</li>
-';                
-                
 $NAVIGATION_TEMPLATE['alt5'] 						= $NAVIGATION_TEMPLATE['side'];
 $NAVIGATION_TEMPLATE['alt6'] 						= $NAVIGATION_TEMPLATE['side'];
 
-?>
+ 

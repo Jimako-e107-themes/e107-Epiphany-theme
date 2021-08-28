@@ -9,9 +9,8 @@ $SIGNIN_TEMPLATE = [];
 $SIGNIN_WRAPPER['signin']['SIGNIN_SIGNUP_HREF'] = '<a href="{---}">{LAN=LAN_LOGINMENU_3}</a>';
 $SIGNIN_WRAPPER['signin']['SIGNIN_LOGIN_HREF'] = '<a href="{---}">{LAN=LAN_LOGINMENU_51}</a>';
 
-$SIGNIN_WRAPPER['signin']['SIGNIN_INPUT_USERNAME'] = "<div class='form-group   m-2'><label class='control-label' for='loginname'>{LAN=LAN_LOGINMENU_1}</label>{---}</div>";
-$SIGNIN_WRAPPER['signin']['SIGNIN_INPUT_PASSWORD'] = "<div class='form-group   m-2'><label class='control-label' for='password'>{LAN=LAN_LOGINMENU_2}</label>{---}</div>";
-$SIGNIN_WRAPPER['signin']['SIGNIN_IMAGECODE_NUMBER'] = "<div class='form-group m-2'><label class='control-label' for='code-verify'>" . e107::getSecureImg()->renderLabel()."</label> {---}";
+ 
+$SIGNIN_WRAPPER['signin']['SIGNIN_IMAGECODE_NUMBER'] = "<div class='form-group m-2'>{---}";
 $SIGNIN_WRAPPER['signin']['SIGNIN_IMAGECODE_BOX'] = "<span><div>{---}</div></span> </div>";
  
 // see issue #4529
@@ -28,7 +27,7 @@ $SIGNIN_TEMPLATE['signin'] =
         <label class="checkbox form-check"><input type="checkbox" name="autologin" value="1" id="autologin-1" class="form-check-input"><span>{LAN=LAN_LOGINMENU_6}</span></label>
     </div>
     <div class="text-center m-2">
-        <input type="submit" class="btn btn-primary button" name="userlogin" value="{LAN=_GO}"">
+        <input type="submit" class="btn btn-primary button" name="userlogin" value="{LAN=LAN_LOGINMENU_51}">
     </div> 		
     {SIGNIN_FORM=end}
   </div>
@@ -37,7 +36,7 @@ $SIGNIN_TEMPLATE['signin'] =
 $SIGNIN_TEMPLATE['signin'] .= ' {SIGNIN_SIGNUP_HREF} | <a href="{SIGNIN_FPW_HREF}" > {LAN=LAN_LOGINMENU_4}</a></div>';				
  
 $SIGNIN_WRAPPER['signout']['SIGNIN_ADMIN_HREF'] = '<a href="{---}"><span class="fa fa-cogs"></span> {LAN=LAN_LOGINMENU_11}</a> | ';
-$SIGNIN_WRAPPER['signout']['SIGNIN_PM_NAV'] = '<li class="dropdown dropdown-pm">{---}</li>';
+//$SIGNIN_WRAPPER['signout']['SIGNIN_PM_NAV'] = '<li class="dropdown dropdown-pm">{---}</li>';
 $SIGNIN_WRAPPER['signout']['EFICTION_LINK'] = '{---} |';
 $SIGNIN_TEMPLATE['signout'] = '
    {SIGNIN_PM_NAV}
