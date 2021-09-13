@@ -22,15 +22,15 @@ if (!defined('e107_INIT')) { exit; }
 	$USER_TEMPLATE = array(); // reset the legacy template above.
 	$USER_WRAPPER = array(); // reset all the legacy wrappers above.
 
-//<div class="col-sm-6"><h6 class="mb-0">{LAN=USER_65}</h6></div><div class="col-sm-6 text-secondary">{USER_LASTVISIT}<br /><small class="padding-left">{USER_LASTVISIT_LAPSE}</small></div>
-	$USER_TEMPLATE['addon']  = '<div class="col-sm-6"><h6 class="mb-0">{USER_ADDON_LABEL}</h6></div><div class="col-sm-6 text-secondary">{USER_ADDON_TEXT}</div>';
+//<div class="col-sm-6"><h6 class="mb-0">{LAN=USER_65}</h6></div><div class="col-sm-6 text-dark">{USER_LASTVISIT}<br /><small class="padding-left">{USER_LASTVISIT_LAPSE}</small></div>
+	$USER_TEMPLATE['addon']  = '<div class="col-sm-6"><h6 class="mb-0">{USER_ADDON_LABEL}</h6></div><div class="col-sm-6 text-dark">{USER_ADDON_TEXT}</div>';
 
 	$USER_TEMPLATE['extended']['start'] = '';
 	$USER_TEMPLATE['extended']['end']   = '';
 
 	$USER_TEMPLATE['extended']['item'] = '
     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap {EXTENDED_ID}">
-    <h6 class="mb-0">{EXTENDED_NAME}:</h6><span class="text-secondary">{EXTENDED_VALUE}</span></li>';
+    <h6 class="mb-0">{EXTENDED_NAME}:</h6><span class="text-dark">{EXTENDED_VALUE}</span></li>';
 
 	$USER_TEMPLATE['list']['start']  = "
 		<div class='content user-list'>
@@ -88,9 +88,9 @@ if (!defined('e107_INIT')) { exit; }
 	</div>
 	";
 
-//<div class="col-sm-6"><h6 class="mb-0">{LAN=USER_65}</h6></div><div class="col-sm-6 text-secondary">{USER_LASTVISIT}<br /><small class="padding-left">{USER_LASTVISIT_LAPSE}</small></div>
+//<div class="col-sm-6"><h6 class="mb-0">{LAN=USER_65}</h6></div><div class="col-sm-6 text-dark">{USER_LASTVISIT}<br /><small class="padding-left">{USER_LASTVISIT_LAPSE}</small></div>
 	// View shortcode wrappers.
-	$USER_WRAPPER['view']['USER_COMMENTPOSTS']      = '<div class="col-sm-6"><h6 class="mb-0">{LAN=USER_68}</h6></div><div class="col-sm-6 text-secondary">{---}';
+	$USER_WRAPPER['view']['USER_COMMENTPOSTS']      = '<div class="col-sm-6"><h6 class="mb-0">{LAN=USER_68}</h6></div><div class="col-sm-6 text-dark">{---}';
 	$USER_WRAPPER['view']['USER_COMMENTPER']        = ' ( {---}% )</div>';
 //	$USER_WRAPPER['view']['USER_SIGNATURE']         = '<p class="text-muted font-size-sm">{---}</p>';
 //	$USER_WRAPPER['view']['USER_RATING']            = '<div>{---}</div>';
@@ -111,7 +111,7 @@ if (!defined('e107_INIT')) { exit; }
 											 
 											<div class="mt-3">
 												<h4>{USER_NAME}</h4>
-												<p class="text-secondary mb-1">{LAN=USER_58}: {USER_ID}</p>
+												<p class="text-dark mb-1">{LAN=USER_58}: {USER_ID}</p>
 												{USER_SIGNATURE}
 												{USER_SENDPM} 
 												{EFICTION_LINK=login}
@@ -133,49 +133,49 @@ if (!defined('e107_INIT')) { exit; }
 								<div class="card">
 									<div class="card-body">
 										<div class="row mb-3">
-											<div class="col-sm-3">
+											<div class="col-sm-3  col-6">
 												<h6 class="mb-0">{LAN=USER_63}</h6>
 											</div>
-											<div class="col-sm-9 text-secondary">
+											<div class="col-sm-9  col-6 text-dark">
 												{USER_REALNAME}
 											</div>
 										</div><hr class="horizontal dark">
 										<div class="row mb-3">
-											<div class="col-sm-3">
+											<div class="col-sm-3  col-6">
 												<h6 class="mb-0">{LAN=USER_02}</h6>
 											</div>
-											<div class="col-sm-9 text-secondary">
+											<div class="col-sm-9  col-6 text-dark">
 												{USER_LOGINNAME}
 											</div>
 										</div><hr class="horizontal dark">
 										<div class="row mb-3">
-											<div class="col-sm-3">
+											<div class="col-sm-3  col-6">
 												<h6 class="mb-0">{LAN=USER_60}</h6>
 											</div>
-											<div class="col-sm-9 text-secondary">
+											<div class="col-sm-9  col-6 text-dark">
 												{USER_EMAIL}
 											</div>
 										</div><hr class="horizontal dark">
 										<div class="row mb-3">
-											<div class="col-sm-3">
+											<div class="col-sm-3  col-6">
 												<h6 class="mb-0">{LAN=USER_54}</h6>
 											</div>
-											<div class="col-sm-9 text-secondary">
+											<div class="col-sm-9  col-6 text-dark">
 												{USER_LEVEL}
 											</div>
 										</div><hr class="horizontal dark">
 										<div class="row mb-3">
-											<div class="col-sm-3">
+											<div class="col-sm-3  col-6">
 												<h6 class="mb-0">{LAN=USER_59}</h6>
 											</div>
-											<div class="col-sm-9 text-secondary">
+											<div class="col-sm-9  col-6 text-dark">
 												{USER_JOIN}<br /><small class="padding-left">{USER_DAYSREGGED}</small>
 											</div>
 										</div><hr class="horizontal dark">
 											</div>
-                                            <div class="row">
-											<div class="col-sm-3"></div>
-											<div class="col-sm-9 text-secondary">{USER_UPDATE_LINK} </div>
+                                            <div class="row my-2">
+											<div class="col-sm-3  col-6"></div>
+											<div class="col-sm-9  col-6 text-dark">{USER_UPDATE_LINK} </div>
 										</div> 
 								</div>
 									</div>
@@ -184,18 +184,18 @@ if (!defined('e107_INIT')) { exit; }
 									<div class="col-sm-12">
 										<div class="card">
 											<div class="card-body">
-												<h5 class="d-flex align-items-center mb-3 text-gradient text-info">Activity </h5>
+												<h5 class="d-flex align-items-center sectionheader">Activity </h5>
 												    <div class="row mb-3">
             											<div class="col-sm-6">
             												<h6 class="mb-0">{LAN=USER_65}</h6>
             											</div>
-            											<div class="col-sm-6 text-secondary">
+            											<div class="col-sm-6 text-dark">
             												{USER_LASTVISIT}<br /><small class="padding-left">{USER_LASTVISIT_LAPSE}</small>
             											</div>
                                                         <div class="col-sm-6">
             												<h6 class="mb-0">{LAN=USER_66}</h6>
             											</div>
-            											<div class="col-sm-6 text-secondary">
+            											<div class="col-sm-6 text-dark">
             												{USER_VISITS}
             											</div>
                                                         {USER_COMMENTPOSTS}{USER_COMMENTPER} 
@@ -220,17 +220,15 @@ if (!defined('e107_INIT')) { exit; }
 	         
   
           
-	                <ul class="pagination d-flex justify-content-between user-view-nextprev">
-	                    <li class="page-item previous">
+	                <div class="pagination d-flex justify-content-between user-view-nextprev">
+	                    <div class="page-item previous">
 	                       {USER_JUMP_LINK=prev}
-	                    </li>
-		               <li>
-	                       <!-- Back to List? -->
-	                    </li>
-	                    <li class="page-item next">
+	                    </div>
+		             
+	                    <div class="page-item next">
 	                       {USER_JUMP_LINK=next}
-	                    </li>
-	                </ul>
+	                    </div>
+	                </div>
 	             
 	       
 			

@@ -2,7 +2,17 @@
 RESPONSIVE GRID LAYOUT
 created by http://artphilia.de
  */
- 
+
+* {
+	margin: 0;
+	padding: 0;
+	}
+
+*, *:after, *:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
 
 .grid-wrapper {
 	width: 100%;
@@ -108,6 +118,7 @@ created by http://artphilia.de
 	padding: 0;
 	margin: 0;
 	width: 100% !important;
+}
 }
 
 @media screen and ( max-width: 567px )  {

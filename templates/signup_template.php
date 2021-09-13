@@ -19,6 +19,11 @@ if(!defined('e107_INIT'))
 	exit;
 }
 
+$theme_settings = array();
+if(class_exists('theme_settings')) {
+ 	$theme_settings = theme_settings::signup_template_settings(); 
+}
+ 
 // Shortcode Wrappers
 
 $SIGNUP_WRAPPER['SIGNUP_DISPLAYNAME'] = 		"<div class='form-group row m-2'>
@@ -87,7 +92,7 @@ $SIGNUP_WRAPPER['SIGNUP_USERCLASS_SUBSCRIBE'] = "<div class='form-group row m-2 
 // Signup Template
 
 
-$SIGNUP_TEMPLATE['start'] = "
+$SIGNUP_TEMPLATE['start'] = $theme_settings['signup-start']. "
 	{SIGNUP_FORM_OPEN} {SIGNUP_ADMINOPTIONS} {SIGNUP_SIGNUP_TEXT}";
 
 
@@ -113,19 +118,20 @@ $SIGNUP_TEMPLATE['body'] = "
 			{SIGNUP_IMAGECODE}
 			{SIGNUP_GDPR_INFO}
 			<div class='m-2'>
-				{SIGNUP_BUTTON: class=".theme_settings::class_submit_button()."}
+				{SIGNUP_BUTTON: class=".$theme_settings['submit_button']."}
 			</div>	 
 	</div>
-	{SIGNUP_FORM_CLOSE}";
+	{SIGNUP_FORM_CLOSE}".$theme_settings['signup-end'];
 
 $SIGNUP_TEMPLATE['end']                     = '';
+ 
 
-$SIGNUP_TEMPLATE['coppa']                   = "{SIGNUP_COPPA_TEXT}<br /><br />
+$SIGNUP_TEMPLATE['coppa']                   = $theme_settings['coppa-start']. "{SIGNUP_COPPA_TEXT}<br /><br />
 											<div style='text-align:center'><b>{LAN=LAN_SIGNUP_17}</b>
 												{SIGNUP_COPPA_FORM}
-											</div>";
+											</div>".$theme_settings['coppa-end'];
 
-$SIGNUP_TEMPLATE['coppa-fail']              = "<div class='alert alert-danger alert-block' style='text-align:center'>{LAN=LAN_SIGNUP_9}</div>";
+$SIGNUP_TEMPLATE['coppa-fail']              = $theme_settings['coppa-start']. "<div class='alert alert-danger alert-block' style='text-align:center'>{LAN=LAN_SIGNUP_9}</div>".$theme_settings['coppa-end'];
 
 $SIGNUP_TEMPLATE['extended-category']       = "
 											<div class='form-group row m-2'>

@@ -20,6 +20,9 @@ $FORUM_NEWPOSTS_END 	= "<br />NEWPOSTS END";
 $FORUM_TRACK_START	= "<br />TRACK-START";
 $FORUM_TRACK_MAIN	= "<br />TRACK-MAIN";
 $FORUM_TRACK_END	= "<br />TRACK-END";
+
+{INFOTITLE} 
+{STATLINK}
 */
 
 // New in v2.x - requires a bootstrap theme be loaded.  
@@ -35,22 +38,29 @@ $FORUM_TEMPLATE['main']['start']			= '
 $FORUM_TEMPLATE['main']['end']				= '
     </div>
     <div class="col-12">
-        <div class="forum-footer text-center"><small>{USERINFOX}</small> | <small>{USERINFO}</small></div>
+        <div class="forum-footer text-center"><small>{USERINFOX}</small> | <small>{USERINFO}</small>
+        <br /> <small> <i>{FORUMINFO}</i></small></div>
+    </div>
+    <div class="col-md-6">
+        <div class="forum-footer text-center"><small><b>{INFO}</b> <br /> {PERMS}</small></div>
+    </div> 
+    <div class="col-md-6">
+        <div class="forum-footer text-center"><small>{USERLIST}</small></div>
     </div>
 </div>';
 
 $SC_WRAPPER['PARENTNAME'] = "<h3>{---}</h3>";
 
 $FORUM_TEMPLATE['main']['parent_start']			= 	'
-<div class="forum-card card'.$theme_settings['forum-card'].'">
+<div class="forum-card '.$theme_settings['forum-card'].'">
   <div class="forum-card-header '.$theme_settings['forum-card-header'].' ">
   	<div class="row">
-  		<div class="col-lg-7 col-md-6 col-12">  {PARENTIMAGE:h=50}{PARENTNAME} {PARENTSTATUS}	</div>
-  		<div class="col-md-2 d-none d-md-block text-center">{LAN=FORUM_0002}/{LAN=FORUM_0003}</div>
-  		<div class="col-lg-3 col-md-4 d-none d-md-block">{LAN=FORUM_0004}</div>
+  		<div class="col-lg-7 col-md-6 col-12 ' . $theme_settings['forum-card-title']. '">  {PARENTIMAGE:h=50}{PARENTNAME} {PARENTSTATUS}	</div>
+  		<div class="col-md-2 d-none d-md-block text-center ' . $theme_settings['forum-card-title']. ' ">{LAN=FORUM_0002}/{LAN=FORUM_0003}</div>
+  		<div class="col-lg-3 col-md-4 d-none d-md-block text-center ' . $theme_settings['forum-card-title']. '">{LAN=FORUM_0004}</div>
   	</div>
   </div> 
-  <div class="card-body">
+  <div class="forum-card-body">
         <ul class="forum-list-group list-group '.$theme_settings['forum-list-group'].'  ">';
 
 $FORUM_TEMPLATE['main']['parent_end']	    = 
@@ -67,15 +77,15 @@ $FORUM_TEMPLATE['main']['forum']			= 	'
       {NEWFLAG}{FORUMIMAGE:h=50}{FORUMNAME}<br><small>{FORUMDESCRIPTION}</small>{FORUMSUBFORUMS} 
       <span class="d-md-none"> 
         <i class="fa fa-list ml-2" title="{LAN=FORUM_0002}" aria-hidden="true"></i><span class="sr-only">{LAN=FORUM_0002}</span> {THREADSX} &nbsp; 
-        <i class="fa fa-comment-o  ml-2" title="{LAN=FORUM_0003}" aria-hidden="true"></i><span class="sr-only">{LAN=FORUM_0003}</span> {REPLIESX}
+        <i class="fa fa-comment-o ml-2" title="{LAN=FORUM_0003}" aria-hidden="true"></i><span class="sr-only">{LAN=FORUM_0003}</span> {REPLIESX}
         <br><small>{LAN=FORUM_0004}: <span class="post-author">{LASTPOST:type=username}</span> <span class="post-date">{LASTPOST:type=datelink}</span></small>
       </span>
     </div>
     
-    <div class="col-md-2 d-none d-md-block text-center">
+    <div class="col-md-2 d-none d-md-block text-center ">
         {THREADS} / {REPLIES}
     </div>
-    <div class="col-lg-3 col-md-4 d-none d-md-block">
+    <div class="col-lg-3 col-md-4 d-none d-md-block text-center ">
         <span class="post-author">{LASTPOST:type=username}</span> 
         <span>{LASTPOST:type=datelink}</span> 
     </div>
@@ -126,23 +136,7 @@ $FORUM_TEMPLATE['track']['item']        = '
 
 
 $FORUM_TEMPLATE['track']['end']         = "</ul></div>";
-
-
-
-
-/*
-$FORUM_TEMPLATE['main-end']				.= "
-
-<div class='center'>
-	<small class='muted'>{PERMS}</small>
-	</div>
-<table style='".USER_WIDTH."' class='fborder table'>\n<tr>
-<td colspan='2' style='width:60%' class='fcaption'>{INFOTITLE}</td>\n</tr>\n<tr>
-<td rowspan='4' style='width:5%; text-align:center' class='forumheader3'>{LOGO}</td>
-<td style='width:auto' class='forumheader3'>{USERINFO}</td>\n</tr>
-<tr>\n<td style='width:95%' class='forumheader3'>{INFO}</td>\n</tr>
-<tr>\n<td style='width:95%' class='forumheader3'>{FORUMINFO}</td>\n</tr>
-<tr>\n<td style='width:95%' class='forumheader3'>{USERLIST}<br />{STATLINK}</td>\n</tr>\n</table>
-";
-*/
+ 
+$FORUM_TEMPLATE['main-end']				.= " ";
+ 
 

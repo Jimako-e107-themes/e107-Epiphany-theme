@@ -1,0 +1,669 @@
+/*
+	Skin Name: Epiphany (responsive)
+	Skin Download: http://artphilia.de
+	Description: This is a grid based responsive layout.
+	Author: Nadia Volkrodt
+	Author E-Mail: nadia@artphilia.de
+*/
+/*************************/
+@import "../skin/base.css";
+/* custom variables here */
+/* all bootstrap variables put in bootstrap scss */
+/*---------------------------------------------------------------------
+   Basic styles
+------------------------------------------------------------------------*/
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #efa008;
+  background-image: url(images/bg-pattern.png);
+  background-repeat: repeat;
+  text-align: justify;
+  font-family: "Raleway", Tahoma, sans-serif;
+  font-size: 11pt;
+  color: #323232;
+  margin: 15px 0;
+  padding: 0;
+}
+
+table {
+  text-align: justify;
+}
+
+tr:nth-child(odd) {
+  background-color: transparent;
+  padding: 6px;
+}
+
+tr:nth-child(even), td:nth-child(even) {
+  background-color: transparent;
+  padding: 6px;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+a, a:active, a:visited {
+  font-weight: normal;
+  text-decoration: none;
+  text-transform: none;
+  color: #efa008;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+
+a:hover {
+  color: #123456;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+h1 {
+  border-bottom: 1px solid #989898;
+  color: #5c5c5c;
+  font-family: "Patua One", cursive;
+  font-size: 26pt;
+  font-weight: normal;
+  margin-bottom: 30px;
+  position: relative;
+  text-align: center;
+}
+
+h1 span {
+  background-color: #e8e8e8;
+  padding: 0 15px;
+  position: relative;
+  top: 20px;
+}
+
+h2 {
+  color: #5c5c5c;
+  font-family: "Patua One", cursive;
+  font-size: 22pt;
+  font-weight: normal;
+  padding: 5px 0;
+}
+
+h3 {
+  border-left: 10px solid #efa008;
+  font-family: "Patua One", cursive;
+  font-size: 18pt;
+  padding: 5px 10px;
+  color: #5c5c5c;
+  font-weight: normal;
+  text-transform: normal;
+}
+
+h4, #pagetitle, .sectionheader {
+  font-size: 16pt;
+  font-family: "Patua One", cursive;
+  font-weight: normal;
+  text-align: center;
+  padding: 10px 0;
+  color: #5c5c5c;
+}
+
+/*---------------------------------------------------------------------
+   General page alignment and width
+------------------------------------------------------------------------*/
+#header {
+  color: #989898;
+  padding: 10px;
+}
+
+.container {
+  background-color: #e8e8e8;
+  background-image: url(images/bg.png);
+  background-repeat: no-repeat;
+  padding: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.content {
+  margin: 80px 0 0 0;
+  text-align: justify;
+  font-style: normal;
+}
+
+.sidebar {
+  margin: 75px 0 25px 0;
+  font-style: normal;
+  text-align: justify;
+  background-color: #dedede;
+  padding: 10px;
+  -webkit-border-radius: 10px 0 10px 0;
+  -moz-border-radius: 10px 0 10px 0;
+  border-radius: 10px 0 10px 0;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/*---------------------------------------------------------------------
+   General page alignment and width
+------------------------------------------------------------------------*/
+.label, label {
+  color: #123456;
+  font-weight: bold;
+}
+
+hr {
+  height: 1px;
+  margin: 15px 0;
+  background: -webkit-gradient(linear, 0 0, 100% 0, from(rgba(0, 0, 0, 0)), color-stop(0.5, #e8e8e8), to(rgba(0, 0, 0, 0)));
+  background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), #e8e8e8, rgba(0, 0, 0, 0));
+  background: -moz-linear-gradient(left, rgba(0, 0, 0, 0), #e8e8e8, rgba(0, 0, 0, 0));
+  background: -o-linear-gradient(left, rgba(0, 0, 0, 0), #e8e8e8, rgba(0, 0, 0, 0));
+  background: linear-gradient(left, rgba(0, 0, 0, 0), #e8e8e8, rgba(0, 0, 0, 0));
+  border: 0;
+}
+
+hr:after {
+  display: block;
+  content: "";
+  height: 30px;
+  background-image: -webkit-gradient(radial, 50% 0%, 0, 50% 0%, 116, color-stop(0%, #dcdcdc), color-stop(100%, rgba(255, 255, 255, 0)));
+  background-image: -webkit-radial-gradient(center top, farthest-side, #dcdcdc 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: -moz-radial-gradient(center top, farthest-side, #dcdcdc 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: -o-radial-gradient(center top, farthest-side, #dcdcdc 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: radial-gradient(farthest-side at center top, #dcdcdc 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+input, textarea, select {
+  background-color: #e8e8e8;
+  border: 1px solid #cbcbcb;
+  font-family: "Raleway", Tahoma, sans-serif;
+  font-size: 10pt;
+  color: #5c5c5c;
+  margin: 2px;
+  padding: 2px 6px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.button, .button a {
+  margin: 0 auto;
+  text-align: center;
+  text-transform: none;
+  margin: 2px;
+  padding: 2px 6px;
+  cursor: pointer;
+  background-color: #e8e8e8;
+  border: 1px solid #cbcbcb;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: #5c5c5c;
+}
+
+blockquote {
+  margin: 10px auto;
+  padding: 15px;
+  width: 90%;
+  border-width: 0 1px;
+  border-style: solid;
+  border-color: #989898;
+}
+
+/*---------------------------------------------------------------------
+  Style of story list
+------------------------------------------------------------------------*/
+.even, .odd, .comment {
+  margin-top: 0;
+  margin-right: auto;
+  margin-bottom: 0;
+  margin-left: auto;
+  padding: 5px;
+}
+
+.even:hover, .odd:hover {
+  background-color: transparent;
+}
+
+/*---------------------------------------------------------------------
+   News
+------------------------------------------------------------------------*/
+#newsarchive, #sortform, .respond {
+  text-align: center;
+}
+
+#newsbox {
+  background-position: top left;
+  background-image: url();
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.newscom {
+  background-color: transparent;
+  font-weight: normal;
+  text-align: right;
+  font-family: "Raleway", Tahoma, sans-serif;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.newssig {
+  font-family: "Raleway", Tahoma, sans-serif;
+  font-style: none;
+  font-size: 9pt;
+  text-align: right;
+  margin-top: 10px;
+  padding: 4px;
+  background-color: #dedede;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/*---------------------------------------------------------------------
+   Categories
+------------------------------------------------------------------------*/
+.category {
+  text-align: left;
+  width: 75%;
+  margin: 0 auto;
+}
+
+.catimg {
+  float: left;
+  padding: 3px 6px 3px 0;
+}
+
+.cat_description {
+  padding: 5px;
+  text-align: left;
+}
+
+/*---------------------------------------------------------------------
+  Page links
+------------------------------------------------------------------------*/
+#pagelinks {
+  width: 100%;
+  text-align: center;
+  padding: 1em;
+  font-family: "Patua One", cursive;
+  font-size: 16pt;
+}
+
+#pagelinks a {
+  font-weight: normal;
+  text-decoration: none;
+  text-transform: none;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+
+#pagelinks a:hover {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a#currentpage {
+  color: #123456;
+  background-color: transparent;
+}
+
+/*---------------------------------------------------------------------
+   Misc Styles, used in multiple places throughout the page
+------------------------------------------------------------------------*/
+#alphabet {
+  text-align: center;
+  padding: 5px;
+  font-family: "Raleway", Tahoma, sans-serif;
+  font-size: 20px;
+}
+
+#jumpmenu {
+  text-align: right;
+}
+
+#story {
+  padding: 50px 10px;
+  text-align: justify;
+}
+
+#login {
+  margin: 0;
+}
+
+#columncontainer {
+  width: 90%;
+  text-align: justify;
+}
+
+.column, #columncontainer a {
+  font-family: "Raleway", Tahoma, sans-serif;
+  font-size: 18px;
+}
+
+.copyright {
+  padding: 5px 0;
+  text-transform: uppercase;
+  font-size: 9pt;
+}
+
+/*---------------------------------------------------------------------
+  MENU
+------------------------------------------------------------------------*/
+#menu {
+  width: 100%;
+}
+
+#menu ul {
+  background: transparent;
+  text-align: center;
+}
+
+#menu li {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 1px;
+  background-color: #292929;
+  -webkit-border-radius: 6px 0 6px 0;
+  -moz-border-radius: 6px 0 6px 0;
+  border-radius: 6px 0 6px 0;
+}
+
+#menu li:hover {
+  background-color: transparent;
+}
+
+#menu a {
+  font-family: "Patua One", cursive;
+  font-size: 11pt;
+  font-style: normal;
+  letter-spacing: 1px;
+  text-align: justify;
+  text-transform: none;
+  color: #efa008;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+
+#menu a:hover {
+  color: #5c5c5c;
+}
+
+/*---------------------------------------------------------------------
+  SITE NAME / SLOGAN
+------------------------------------------------------------------------*/
+#sitename {
+  color: #dedede;
+  font-family: "Patua One", cursive;
+  font-size: 32pt;
+  text-shadow: 0 0 2px #222;
+  padding-top: 20px;
+  text-align: center;
+}
+
+#slogan {
+  color: #dedede;
+  font-family: "Raleway", Tahoma, sans-serif;
+  font-size: 10pt;
+  text-transform: none;
+  font-style: italic;
+  margin: -10px 0 0 50px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+/* from bootstrap 5 */
+/* navigation */
+/* links */
+/* theme */
+/* e107 */
+/* li bgground */
+/* dropdown */
+/*  cards */
+.forum-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+.forum-card > hr {
+  margin-right: 0;
+  margin-left: 0;
+}
+.forum-card > .list-group {
+  border-top: inherit;
+  border-bottom: inherit;
+}
+.forum-card > .list-group:first-child {
+  border-top-width: 0;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+.forum-card > .list-group:last-child {
+  border-bottom-width: 0;
+  border-bottom-right-radius: calc(0.25rem - 1px);
+  border-bottom-left-radius: calc(0.25rem - 1px);
+}
+.forum-card > .card-header + .list-group,
+.forum-card > .list-group + .card-footer {
+  border-top: 0;
+}
+
+.forum-card-header {
+  padding: 0.5rem 1rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.forum-card-header:first-child {
+  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+}
+
+.forum-list-group.list-group.list-group-striped li:nth-of-type(odd) {
+  background: transparent;
+  color: #212529;
+}
+
+.forum-list-group.list-group.list-group-striped li:nth-of-type(even) {
+  background: rgba(0, 0, 0, 0.05);
+  color: #212529;
+}
+
+.forum-list-group.list-group.list-group-hover li:hover {
+  background: rgba(0, 0, 0, 0.075);
+  color: #212529;
+}
+
+/* User Profile css */
+.panel-profile .user-avatar {
+  max-width: 150px;
+  max-height: 150px;
+  margin-top: -90px;
+  margin-bottom: 15px;
+  border: 5px solid #fff;
+  border-radius: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.panel-profile .panel-body span.padding-left {
+  display: block;
+}
+
+.panel-profile .panel-body p {
+  clear: both;
+  float: none;
+  display: block;
+}
+
+.panel-profile .profile-header {
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.panel-profile .panel-heading {
+  padding: 10px;
+}
+
+.panel-profile .profile-header h4 {
+  padding-bottom: 30px;
+}
+
+.panel-profile .panel-body p.row {
+  border-top: 1px solid rgba(170, 170, 170, 0.35);
+  padding-top: 10px;
+}
+
+.panel-profile .panel-body div.row {
+  border-top: 1px solid rgba(170, 170, 170, 0.35);
+  padding: 10px 0;
+}
+
+/* NOTE: no border or anything, HTML markup is always there, with first and last item too */
+.user-view-nextprev .next {
+  float: right;
+  border: none;
+}
+
+.user-view-nextprev .previous {
+  float: left;
+  border: none;
+}
+
+.login .search.form-control,
+.tbox.search.form-control,
+.form-control.search {
+  width: auto;
+  display: inline-block;
+  background-color: #e8e8e8;
+  border: 1px solid #cbcbcb;
+  font-family: "Raleway", Tahoma, sans-serif;
+  font-size: 10pt;
+  color: #5c5c5c;
+  margin: 2px;
+  padding: 2px 6px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.form-control.login {
+  text-align: initial;
+}
+
+.btn.submit.btn-default.btn-secondary.button.search {
+  margin: 0 auto;
+  text-align: center;
+  text-transform: none;
+  margin: 2px;
+  padding: 2px 6px;
+  cursor: pointer;
+  background-color: #e8e8e8;
+  border: 1px solid #cbcbcb;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: #5c5c5c;
+  font-family: "Raleway", Tahoma, sans-serif;
+  font-size: 10pt;
+}
+
+.btn, a.btn-primary, a.btn-default {
+  margin: 0 auto;
+  text-align: center;
+  text-transform: none;
+  margin: 2px;
+  padding: 2px 6px;
+  cursor: pointer;
+  background-color: #e8e8e8;
+  border: 1px solid #cbcbcb;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  color: #5c5c5c;
+  font-family: "Raleway", Tahoma, sans-serif;
+  font-size: 10pt;
+}
+
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.news_image {
+  padding: 1rem;
+}
+
+/* pager look at forum track template */
+ul.pager {
+  list-style-type: none;
+}
+
+.btn.submit.btn-success {
+  color: #fff;
+  background-color: #4D4A4B;
+  border-color: #4D4A4B;
+  color: #5c5c5c;
+  background-color: #e8e8e8;
+  border: 1px solid #cbcbcb;
+}
+.btn.submit.btn-success:hover {
+  color: #fff;
+  background-color: #413f40;
+  border-color: #3e3b3c;
+}
+.btn-check:focus + .btn.submit.btn-success, .btn.submit.btn-success:focus {
+  color: #fff;
+  background-color: #413f40;
+  border-color: #3e3b3c;
+  box-shadow: 0 0 0 0.25rem rgba(104, 101, 102, 0.5);
+}
+.btn-check:checked + .btn.submit.btn-success, .btn-check:active + .btn.submit.btn-success, .btn.submit.btn-success:active, .btn.submit.btn-success.active, .show > .btn.submit.btn-success.dropdown-toggle {
+  color: #fff;
+  background-color: #3e3b3c;
+  border-color: #3a3838;
+}
+.btn-check:checked + .btn.submit.btn-success:focus, .btn-check:active + .btn.submit.btn-success:focus, .btn.submit.btn-success:active:focus, .btn.submit.btn-success.active:focus, .show > .btn.submit.btn-success.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.25rem rgba(104, 101, 102, 0.5);
+}
+.btn.submit.btn-success:disabled, .btn.submit.btn-success.disabled {
+  color: #fff;
+  background-color: #4D4A4B;
+  border-color: #4D4A4B;
+}
+
+.active a.login_menu_link {
+  color: #fff;
+}
+
+.e-instant-edit {
+  position: relative;
+}
+
+.pm-nav.nav-link {
+  display: initial;
+  padding: initial;
+  color: #464E54;
+  text-decoration: none;
+  transition: none;
+}
+
+/*# sourceMappingURL=style.css.map */

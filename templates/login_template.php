@@ -1,14 +1,12 @@
 <?php
 
 if (!defined('e107_INIT')) { exit; }
-
-
+ 
+ 
 $theme_settings = array();
-if(class_exists('theme')) {
- $theme_settings = theme_settings::get_membersonly_template(); 
- $form_settings = theme_settings::get_singleforms(); 
+if(class_exists('theme_settings')) {
+ $theme_settings = theme_settings::login_template_settings(); 
 }
-
 
 $LOGIN_TEMPLATE['page']['body'] = '
 		{LOGIN_TABLE_LOGINMESSAGE}
@@ -45,22 +43,16 @@ $LOGIN_TEMPLATE['page']['body'] .= '
 		{LOGIN_TABLE_SECIMG_SECIMG} {LOGIN_TABLE_SECIMG_TEXTBOC}
         {LOGIN_TABLE_REMEMBERME}
         {LOGIN_TABLE_SUBMIT}
-</div>
+</div>';
  
-
- ';
- 
- 
-$LOGIN_TEMPLATE['page']['header'] =  $theme_settings['membersonly_start'].'
- <div id="login-template">'.$form_settings['login_logo'];
+$LOGIN_TEMPLATE['page']['header'] =  $theme_settings['page_start'].'
+ <div id="login-template">'.$theme_settings['page_logo'];
 
 $LOGIN_TEMPLATE['page']['footer'] =  ' 
     			<div class="login-page-footer" style="text-align: center;">
     				{LOGIN_TABLE_SIGNUP_LINK} | {LOGIN_TABLE_FPW_LINK}
     			</div>
 	           </div>'.
-$theme_settings['membersonly_end'];
+$theme_settings['page_end'];
 	
-
-
-
+ 

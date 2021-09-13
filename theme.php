@@ -1,104 +1,93 @@
 <?php
 
+if(!defined('e107_INIT'))
+{
+	exit();
+}
+
 if (!defined('e107_INIT')) {
     exit();
 }
+ 
 $sitetheme = deftrue('USERTHEME', e107::getPref('sitetheme')); 
 e107::getSingleton('theme_settings', e_THEME.$sitetheme."/theme_settings.php");
-
+ 
+////// Multilanguages/ /////////////////////////////////////////////////////////
 e107::lan('theme');
 
 ////////////////////////////////////////////////////////////////////////////////
-define("THEME_LEGACY", true); 
- 
-define("THEME_DISCLAIMER", 'Skin by <a href="http://artphilia.de">Artphilia Designs</a>. All rights reserved.');
- 
+define("THEME_LEGACY",false); //warning it is ignored somewhere
+define("THEME_DISCLAIMER", "Copyright &copy; 2015 Skin by <a href='http://artphilia.de'>Artphilia Designs</a>. All rights reserved.");
+////// Your own css fixes ////////////////////////////////////////////////////
+define("CORE_CSS", false);  //copy core e107.css to theme and remove problematic rules 
+
+/* way how to avoid loading libraries by core **********************************/
+define("BOOTSTRAP",  5);
+define("FONTAWESOME",  5);
+
+e107::getParser()->setBootstrap(5);
+e107::getParser()->setFontAwesome(5);
+
+function fake() {
+  $fake = "font-awesome.min.css";
+  $fake = "bootstrap.min.js";
+  $fake = "bootstrap.min.css";
+}
+
+
 /* LAYOUTS */
 $layout = '_default';
+$elements = array();
 
-$search_shortcode = "{SEARCH}";
-$topnav_shortcode = "{SIGNIN}";
+/* we need 2 headers */
+$LAYOUT['_header_'] = '';
+$LAYOUT['_footer_'] = '';
 
+/***********************HOMEPAGE LAYOUT see index.tpl *************************/ 
+$LAYOUT['index'] = 
+theme_settings::layout_header(). 
+'<div class="gb-full">
+	<div class="gb-50">{WMESSAGE}</div>
+	<div class="gb-50">{ALERTS}{SETSTYLE=main}{---}{MENU=3}</div> 
+</div>'
+.theme_settings::layout_footer();
+ 
+ 
+/***********************DEFAULT SIDEBAR  LAYOUT *******************************/ 
+$LAYOUT['default'] = theme_settings::layout_header().'
+{ALERTS}{SETSTYLE=main}
+<div class="gb-80">{---}</div>
+<div class="gb-20">'.theme_settings::layout_sidebar('right').'</div>
+<div class="gb-full">'.theme_settings::layout_sidebar('footer').'</div>'
+.theme_settings::layout_footer();
+
+
+
+/* forum layout THEME_LAYOUT is not available */ 
+ 
+$LAYOUT['full'] = theme_settings::layout_header().' 
+{ALERTS}{SETSTYLE=main}<div class="gb-full">{---}</div>'.theme_settings::layout_footer();
+ 
+/* only in case efiction plugin is installed, otherwise use default shortcodes, just for testing  */
 if(e107::isInstalled('efiction'))
 { 
-	$search_shortcode = "{search_content}";  //temp todo use search addon, it is not parsed, it is correct for now
-    $topnav_shortcode = '<span class="fa fa-power-off"></span> {adminarea} {login} {logout}</div><div id="login">{login_content}</div>';
-}	
+    $elements['search_shortcode'] = "{EFICTION_BLOCK_CONTENT: key=search}";
+    $elements['topnav_shortcode'] = '<span class="fa fa-power-off"></span> {adminarea}{SIGNIN}';
+    $elements['navbar_shortcode'] = '{EFICTION_BLOCK_CONTENT: key=menu}';
+    $elements['slogan_shortcode'] = '{SITETAG}';
+    $elements['sitename_shortcode'] = '{SITENAME}';  
+    $elements['layout_sidebar']     = ''; 
+    $elements['skinchange_block']  = "{SETSTYLE=default}{MENU: path=skinchange/skinchange}";
+    $elements['footer_message'] = "{footer}"; 
+ 
+    $LAYOUT_HEADER =  theme_settings::layout_header($elements);
+    $LAYOUT_FOOTER =  theme_settings::layout_footer($elements);
+}
 
-$LAYOUT['_header_'] = '
-<div class="grid-wrapper container">
-	<div class="gb-full">
-		<div id="header">
-			<div class="gb-50">
-			<div align="left">'.$topnav_shortcode.'</div></div>
-			<div class="gb-50">
-				<div align="right">'.$search_shortcode.'</div>
-			</div>
-			<div id="sitename">{SITENAME}</div>
-			<div id="slogan">{SITETAG}</div>
-			<div id="menu">{NAVIGATION}</div>
-		</div>
-	</div>
-	';
-
-$LAYOUT['_footer_'] = '
-	<div class="gb-full">
-		{SETSTYLE=block-footer}
-		{MENU=3}
-		{DEFAULT_MENUAREA=3} 
-	</div>
-
-	<!-- START BLOCK : footer -->
-	<div class="gb-full footer">
-		<hr />
-		{footer}
-		<div class="copyright">{THEME_DISCLAIMER}</div>
-	</div>
-
-</div> <!-- closing content grid --> ';
-
-
-$LAYOUT['index'] = '
-<div class="gb-80 content">
-	<div class="gb-full">
-		<div class="gb-50">{WMESSAGE}</div>
-		<div class="gb-50">{ALERTS}{---}{SETSTYLE=main}{MENU=4}</div>
-	</div>
-</div>
-<div class="gb-20 sidebar">
-	{SETSTYLE=block-sidebar}
-	{MENU=1}
-	{DEFAULT_MENUAREA=1}
-	{SETSTYLE=sidebar}
-	{MENU=2}
-	{DEFAULT_MENUAREA=2}
-</div>';
-
-//{SETSTYLE=block-sidebar} colored menu header
-//{SETSTYLE=sidebar} plain header
-
-$LAYOUT['default'] = '
-<div class="gb-80 content">
-{ALERTS}{---}
-</div>
-<div class="gb-20 sidebar">
-			{SETSTYLE=block-sidebar}
-			{MENU=1}
-			{DEFAULT_MENUAREA=1}
-			{SETSTYLE=sidebar}
-			{MENU=2}
-			{DEFAULT_MENUAREA=2}
-			<div align="center">{xml} {skinchange_content}</div>
-	</div>
-	';
-
-$LAYOUT['efiction'] = '
-<div class="gb-full">{ALERTS}{---}</div>';
-
-////// Your own css fixes ////////////////////////////////////////////////////
-define("CORE_CSS", false);
-e107::css('theme', 'e107.css');
-
+$LAYOUT['efiction'] = $LAYOUT_HEADER.'{ALERTS}
+{---}'.$LAYOUT_FOOTER;
+ 
+ 
 ////// Theme meta tags /////////////////////////////////////////////////////////
 set_metas();
 
@@ -116,27 +105,32 @@ register_icons();
 
 getInlineCodes();
 
+
+
 function set_metas()
 {
-		e107::meta("viewport", "width=device-width, initial-scale=1");
+    e107::meta('viewport', 'width=device-width, initial-scale=1.0');
 }
 
 function register_css()
 {
-	//e107::css('theme', 'skin/base.css');
-    e107::css('theme', 'css/main.css');
-	e107::css('theme', 'skin/style.css');
-    e107::css('theme', 'css/e107.css');
+    e107::css('theme', 'css/bootstrap.css');
+	e107::css('theme', 'css/style.css');
+	e107::css('theme', 'e107.css');
 }
-            
+          
 function register_js()
 {
+    e107::js('theme', 'js/bootstrap.bundle.min.js', 'jquery');
+
 	e107::js('theme', 'fix.js', 'jquery'); 
 }
            
 function register_fonts()
-{
-	
+{ 
+  e107::css('url', 'https://fonts.googleapis.com/css?family=Raleway:400,700,300|Patua+One:400display=swap&subset=latin-ext');
+  e107::css('url', 'https://use.fontawesome.com/releases/v5.3.1/css/all.css');
+ 
 }
           
 function register_icons()
@@ -169,9 +163,9 @@ function remove_ptags($text = '') // FIXME this is a bug in e107 if this is requ
 }
 
 
-function tablestyle($caption, $text, $mode='', $options = array())
+	function tablestyle($caption, $text, $mode, $options = array())
 	{
-	
+
 		$style = varset($options['setStyle'], 'default');
 		
 		if (e_DEBUG) {
@@ -186,15 +180,18 @@ function tablestyle($caption, $text, $mode='', $options = array())
 		}
 
 		switch ($mode) {
+            case "contact-form":
+            case "comment":
+                $style = 'main2';
+            break;
 			case 'wmessage':
 			case 'wm':
 				$style = 'wmessage';
 			break;
 			case 'login_page':
 				$style = 'none';
-
-			case "news":
-					
+            break;
+			case "news":	
 			break;
 
 		}
@@ -210,31 +207,35 @@ function tablestyle($caption, $text, $mode='', $options = array())
 			echo "\n-->\n\n";
 		}
 
-		switch ($style) {
-			case 'wmessage':         
-				echo $text;
-			break;
+		switch($style)
+		{
+ 	
+			//      <h1><span>{news_title}</span></h1>{news_content}
+			case 'main': 
+			case 'wmessage':	
+					if(!empty($caption))
+					{
+						echo '<h1><span>' . $caption . '</span></h1>';
+					}
+					echo '<div class="gb-full">'.$text.'</div>';      
 
+			break;  
+
+			case 'main2': 
+
+					if(!empty($caption))
+					{
+						echo '<h2 class="h1"><span>' . $caption . '</span></h2>';
+					}
+					echo $text;      
+
+			break; 
+            			
 			case 'none':
 			case 'nocaption':			
-				echo $text;
+					echo $text;
 			break;
-			case 'main':
-				if (!empty($caption)) {
-					echo '<h1><span>' . $caption . '</span></h1><br>';   
-					//  echo $caption;
-				}
-				echo $text;
-				break;	
 
-			case 'default':
-				if (!empty($caption)) {
-					echo '<h2 id="pagetitle">' . $caption . '</h2>';   
-					//  echo $caption;
-				}
-				echo $text;
-			break;					
-				
 			case "block-sidebar": {
 				
 				if (!empty($caption)) {
@@ -244,7 +245,20 @@ function tablestyle($caption, $text, $mode='', $options = array())
 				echo $text;
 				echo "<br /><br />";  //fix me with margin
 				break;
-			}     
+			}    
+            
+			case "block-footer": {
+				
+				echo '<div class="gb-33">';
+                if (!empty($caption)) {
+					echo '<h3>' . $caption . '</h3>';   
+					//  echo $caption;
+				}
+                
+				echo $text;
+				echo "</div>";  
+				break;
+			}            
 
 			case "sidebar": {
 				echo '<div align="center">';
@@ -254,29 +268,28 @@ function tablestyle($caption, $text, $mode='', $options = array())
 				echo $text;
 				echo "</div>";  //fix me with margin
 				break;
-			} 
-
-			case "block-footer": {
-				echo '<div class="gb-33">';
-				if (!empty($caption)) {
-					echo '<h3>' . $caption . '</h3>';   
-					//  echo $caption;
-				}
-				echo $text;
-				echo "</div>";
-				break;
 			}
-
-				
+            
 			default:
-				// default style
-				// only if this always work, play with different styles
 
-			if (!empty($caption)) {
-				echo '<h2 id="pagetitle">' . $caption . '</h2>';
+			// default style
+			// only if this always work, play with different styles
+
+			if(!empty($caption))
+			{
+				echo  $caption  ;
 			}
 			echo $text;
 
-			return;
+			return;      
 		}
+
 	}
+
+    
+    
+ 
+
+
+
+ 
